@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        REPO_URL = 'https://github.com/kiranpotnuri2877/docker-mysql-nodejs-reactjs-app.gitt'
+        REPO_URL = 'https://github.com/kiranpotnuri2877/docker-mysql-nodejs-reactjs-app.git'
         BRANCH   = 'main'
     }
 
