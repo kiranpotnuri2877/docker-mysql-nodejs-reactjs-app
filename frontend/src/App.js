@@ -3,6 +3,7 @@ import axios from "axios";
 import React, { useState, useEffect } from "react";
 
 const URL = "";
+
 function App() {
   const [data, setData] = useState([]);
   const [inputValue, setInputValue] = useState("");
@@ -15,9 +16,10 @@ function App() {
     try {
       const response = await axios.get(URL + "/user");
       console.log(response.data);
-      setData(response.data);
+      setData(Array.isArray(response.data) ? response.data : []);
     } catch (error) {
       console.error(error);
+      setData([]);
     }
   };
 
@@ -29,7 +31,7 @@ function App() {
     try {
       const response = await axios.post(URL + "/user", { data: inputValue });
       console.log(response.data);
-      fetchData(); // Fetch data again after posting
+      fetchData();
     } catch (error) {
       console.error(error);
     }
@@ -56,7 +58,7 @@ function App() {
   return (
     <div className="App">
       <h1>User Submit Form</h1>
-      <input name="input-parameter" onChange={handleChange} />
+      <input name="input-parameter" onChange={handleChange} value={inputValue} />
       <br />
       <br />
       <button onClick={postData}>Submit</button> <br />
@@ -81,7 +83,7 @@ function App() {
             </tr>
           </thead>
           <tbody>
-            {data.map((user) => (
+            {data?.map((user) => (
               <tr key={user.id}>
                 <td>{user.id}</td>
                 <td>{user.name}</td>
