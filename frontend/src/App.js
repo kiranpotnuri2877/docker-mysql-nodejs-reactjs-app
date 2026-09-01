@@ -2,7 +2,7 @@ import "./App.css";
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 
-const URL = "";
+const URL = process.env.REACT_APP_API_URL || "";
 
 function App() {
   const [data, setData] = useState([]);
